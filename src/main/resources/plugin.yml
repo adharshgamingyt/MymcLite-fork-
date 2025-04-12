@@ -1,0 +1,12 @@
+name: MymcLite
+version: '1.0-SNAPSHOT'
+main: me.supposedly_sam.mymcLite.MymcLite
+api-version: '1.21'
+commands:
+  setspawn:
+    description: Set spawn location of the world
+    usage: /<command>
+
+permissions:
+  mymclite.setspawn:
+    default: op

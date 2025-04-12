@@ -1,0 +1,6 @@
+prefix: "&b[MYMC] "
+
+#
+spawn:
+  spawn-location: ""
+  force-spawn-on-join: true
