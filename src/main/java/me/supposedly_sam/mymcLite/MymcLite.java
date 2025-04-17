@@ -1,5 +1,6 @@
 package me.supposedly_sam.mymcLite;
 
+import me.supposedly_sam.mymcLite.Commands.Build;
 import me.supposedly_sam.mymcLite.Commands.SetSpawn;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
@@ -18,6 +19,7 @@ public final class MymcLite extends JavaPlugin {
 
         // Command Registers
         registerCommand("setspawn", new SetSpawn(this));
+        registerCommand("build", new Build());
 
 
     }

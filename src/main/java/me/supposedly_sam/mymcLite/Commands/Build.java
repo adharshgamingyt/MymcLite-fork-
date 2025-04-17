@@ -14,16 +14,30 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public class Build implements CommandExecutor {
-    private final Plugin plugin;
-    public static ArrayList<Player> buildAllowedPlayers;
 
-    public Build(Plugin plugin) {
-        this.plugin = plugin;
+    private static ArrayList<Player> buildAllowedPlayers;
+
+    public static ArrayList<Player> getBuildAllowedPlayers() {
+        return buildAllowedPlayers;
     }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
+        if (sender instanceof Player p) {
+            if (!p.hasPermission("mymclite.build")) {
+                Responses.sendNotAuthorized(p);
+                return true;
+            }
 
+            buildMethod(p, args);
+        } else {
+            if (args.length != 1) {
+                Responses.sendCommandUsage(sender, "/build <player>");
+                return true;
+            }
+
+            buildMethod(sender, args);
+        }
         return true;
     }
 
@@ -34,8 +48,7 @@ public class Build implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            if ()
-
+            Player p = (Player) sender;
             if (!buildAllowedPlayers.contains(p)) {
                 buildAllowedPlayers.add(p);
                 p.sendMessage(ChatColor.GREEN + "Build mode enabled!");
@@ -45,15 +58,17 @@ public class Build implements CommandExecutor {
             }
         } else {
             String targetName = args[0];
-            if (HelperFunctions.isPlayerOnline(p, targetName)) {
-                Player target = Bukkit.getPlayerExact(targetName);
-                if (!buildAllowedPlayers.contains(target)) {
-                    buildAllowedPlayers.add(target);
-                    target.sendMessage(ChatColor.GREEN + "Build mode enabled by a staff");
-                } else {
-                    buildAllowedPlayers.remove(target);
-                    target.sendMessage(ChatColor.RED + "Build mode disabled by a staff");
-                }
+            if (!HelperFunctions.isPlayerOnline(sender, targetName)) {
+                return;
+            }
+
+            Player target = Bukkit.getPlayerExact(targetName);
+            if (!buildAllowedPlayers.contains(target)) {
+                buildAllowedPlayers.add(target);
+                target.sendMessage(ChatColor.GREEN + "Build mode enabled by a staff");
+            } else {
+                buildAllowedPlayers.remove(target);
+                target.sendMessage(ChatColor.RED + "Build mode disabled by a staff");
             }
         }
     }
