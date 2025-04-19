@@ -1,3 +1,9 @@
+# Join/Leave messages
+# Supports PlaceholderAPI and minecraft color codes
+# Leave blank to use vanilla join/leave messages
+join-message: "&f[&a+&f] &7%player_name%"
+leave-message: "&f[&c-&f] &7%player_name%"
+
 # Force players to spawn on joining
 # Requires set spawn to work
 spawn:
@@ -17,7 +23,7 @@ build:
 chat:
   enabled: true
   # Default chat format
-  # PlaceholderAPI and minecraft color codes supported
+  # Supports PlaceholderAPI and minecraft color codes
   # In-built placeholders:
   # - %author%: Message author
   # - %message%: Message content
@@ -38,18 +44,66 @@ disabled-commands:
   disable-message: "&cThis command has been disabled."
 
 # Game Selector Inventory
+# Enable/Disable a game selector menu (Mainly used for hubs)
 game-selector:
   enabled: true
+
+  # Hotbar item which will execute the /gsel command
+  # Given to players on join
+  # Disabling this will require players to use /gsel command manually
+  hotbar-item:
+    enabled: true
+    # Player's hotbar slot in which this item is placed
+    # Between 0 and 8
+    hotbar-slot: 0
+    # Material of the hotbar item
+    # Spaces must be replaced with '_'
+    material: "SUNFLOWER"
+    # Display name of the item
+    # Supports PlaceholderAPI and minecraft color codes
+    display-name: "&3Game Selector"
+
+  # Title of the game selector inventory
+  # Supports PlaceholderAPI and minecraft color codes
   title: "&3Game Selector"
+  # Size of the inventory
+  # Must be multiples of 9 (9, 18, 27, 36, 45)
+  # Inventory slot is 0 based (counted from 0 to 45)
   size: 27
+  # If enabled, all slots (other than which contains items)
+  # will be occupied with a filler glass
   filler-glass-enabled: true
+  # Items sections
+  # To add more items, copy the below configuration
   items:
+    # Item key (Must be unique)
     item1:
+      # Material to be shown in the inventory
+      # Spaces must be replaced with '_'
       material: "GRASS_BLOCK"
+      # Amount of items to be shown
+      # Between 1 and 64
       count: 1
+      # If the item should be shown as enchanted
+      # Enchantment will be hidden (on hover)
       enchanted: true
+      # Display name of the item
+      # Supports PlaceholderAPI and minecraft color codes
       display-name: "Sample"
+      # Lore or text shown on hover of the item
+      # Support PlaceholderAPI and minecraft color codes
       lore:
-        - "Line 1"
+        - "&aLine 1"
         - "Line 2"
-      inventory-position: 3
+      # Position in the inventory where this item should be placed
+      # Between 0 to (size-1)
+      # If multiple items have the same position (it will be overwritten)
+      inventory-position: 0
+      # Commands to be executed by the player on click of the item
+      # Leaving this empty will remove click commands from this item
+      # Available click types 'LEFT', 'RIGHT', 'SHIFT_LEFT', 'SHIFT_RIGHT', 'DROP' (Q)
+      # Format: CLICK_TYPE: "command"
+      # Click types must be uppercase, commands do not need '/'
+      click-commands:
+        LEFT: "list"
+        RIGHT: "pl"

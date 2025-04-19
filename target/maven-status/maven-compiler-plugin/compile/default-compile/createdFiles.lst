@@ -14,4 +14,7 @@ me\supposedly_sam\mymcLite\Utils\HelperFunctions.class
 me\supposedly_sam\mymcLite\Commands\Spawn.class
 me\supposedly_sam\mymcLite\Events\BuildEvents.class
 me\supposedly_sam\mymcLite\Commands\Reload.class
+me\supposedly_sam\mymcLite\Events\InventoryClick.class
+me\supposedly_sam\mymcLite\Events\LeaveEvent.class
+me\supposedly_sam\mymcLite\Models\GSItemClickModel.class
 me\supposedly_sam\mymcLite\Commands\SetSpawn.class

@@ -7,8 +7,11 @@ C:\Users\fttga\IdeaProjects\MymcLite\src\main\java\me\supposedly_sam\mymcLite\Co
 C:\Users\fttga\IdeaProjects\MymcLite\src\main\java\me\supposedly_sam\mymcLite\Events\BuildEvents.java
 C:\Users\fttga\IdeaProjects\MymcLite\src\main\java\me\supposedly_sam\mymcLite\Events\Chat.java
 C:\Users\fttga\IdeaProjects\MymcLite\src\main\java\me\supposedly_sam\mymcLite\Events\DisabledCommands.java
+C:\Users\fttga\IdeaProjects\MymcLite\src\main\java\me\supposedly_sam\mymcLite\Events\InventoryClick.java
 C:\Users\fttga\IdeaProjects\MymcLite\src\main\java\me\supposedly_sam\mymcLite\Events\JoinEvent.java
+C:\Users\fttga\IdeaProjects\MymcLite\src\main\java\me\supposedly_sam\mymcLite\Events\LeaveEvent.java
 C:\Users\fttga\IdeaProjects\MymcLite\src\main\java\me\supposedly_sam\mymcLite\Models\GameSelectorItemModel.java
+C:\Users\fttga\IdeaProjects\MymcLite\src\main\java\me\supposedly_sam\mymcLite\Models\GSItemClickModel.java
 C:\Users\fttga\IdeaProjects\MymcLite\src\main\java\me\supposedly_sam\mymcLite\MymcLite.java
 C:\Users\fttga\IdeaProjects\MymcLite\src\main\java\me\supposedly_sam\mymcLite\Utils\HelperFunctions.java
 C:\Users\fttga\IdeaProjects\MymcLite\src\main\java\me\supposedly_sam\mymcLite\Utils\Inventories.java

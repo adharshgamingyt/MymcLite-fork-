@@ -7,7 +7,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
@@ -50,7 +49,11 @@ public class Inventories {
         // Filler Glass
         if (plugin.getConfig().getBoolean("game-selector.filler-glass-enabled")){
             ItemStack fillerItem = new ItemStack(Material.GRAY_STAINED_GLASS_PANE, 1);
-            for (int i = 0; i <= size; i ++) {
+            ItemMeta fillerMeta = fillerItem.getItemMeta();
+            fillerMeta.setDisplayName(" ");
+            fillerItem.setItemMeta(fillerMeta);
+
+            for (int i = 0; i < size; i ++) {
                 if (itemPositions.contains(i)){
                     continue;
                 }
@@ -110,7 +113,7 @@ public class Inventories {
                 if (itemMaterial == null) continue;
 
                 int count = itemSection.getInt("count");
-                if (count < 1) count = 1;
+                if (count < 1 || count > 64) count = 1;
 
                 boolean enchanted = itemSection.getBoolean("enchanted");
 

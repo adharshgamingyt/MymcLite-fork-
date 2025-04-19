@@ -2,10 +2,7 @@ package me.supposedly_sam.mymcLite;
 
 import com.google.common.collect.Iterables;
 import me.supposedly_sam.mymcLite.Commands.*;
-import me.supposedly_sam.mymcLite.Events.BuildEvents;
-import me.supposedly_sam.mymcLite.Events.Chat;
-import me.supposedly_sam.mymcLite.Events.DisabledCommands;
-import me.supposedly_sam.mymcLite.Events.JoinEvent;
+import me.supposedly_sam.mymcLite.Events.*;
 import me.supposedly_sam.mymcLite.Utils.PluginMessages;
 import me.supposedly_sam.mymcLite.Utils.SpawnFile;
 import org.bukkit.Bukkit;
@@ -24,6 +21,8 @@ import java.util.ArrayList;
 
 public final class MymcLite extends JavaPlugin {
 
+    private final PluginMessages pluginMessages = new PluginMessages();
+
     @Override
     public void onEnable() {
 
@@ -33,15 +32,16 @@ public final class MymcLite extends JavaPlugin {
         new SpawnFile(this);
 
         // Channel Registers
-        PluginMessages pluginMessages = new PluginMessages();
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         Bukkit.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", pluginMessages);
 
         // Event Registers
         registerListener(new JoinEvent(this));
+        registerListener(new LeaveEvent(this));
         registerListener(new BuildEvents(this));
         registerListener(new Chat(this));
         registerListener(new DisabledCommands(this));
+        registerListener(new InventoryClick(this));
 
         // Command Registers
         registerCommand("mlreload", new Reload(this));
@@ -55,7 +55,9 @@ public final class MymcLite extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        // Unregistering Plugin Channels
+        Bukkit.getServer().getMessenger().unregisterOutgoingPluginChannel(this, "BungeeCord");
+        Bukkit.getServer().getMessenger().unregisterIncomingPluginChannel(this, "BungeeCord", pluginMessages);
     }
 
     // Command/Tab completer register
