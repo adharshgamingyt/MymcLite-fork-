@@ -1,14 +1,17 @@
 package me.supposedly_sam.mymcLite.Commands;
 
 import me.supposedly_sam.mymcLite.Utils.Responses;
+import me.supposedly_sam.mymcLite.Utils.SpawnFile;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.*;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,7 +26,7 @@ public class SetSpawn implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (!(sender instanceof Player p)) {
-            plugin.getLogger().warning("'/setspawn' can only be executed by a player.");
+            Responses.sendNonPlayerExecution(sender);
             return true;
         }
 
@@ -43,10 +46,25 @@ public class SetSpawn implements CommandExecutor, TabCompleter {
         Location centeredLocation = new Location(playerLoc.getWorld(), centeredX, playerLoc.getY(), centeredZ, playerLoc.getYaw(), playerLoc.getPitch());
 
         p.getWorld().setSpawnLocation(centeredLocation);
-        plugin.getConfig().set("spawn.spawn-location", centeredLocation);
+
+        FileConfiguration spawnFile = SpawnFile.getSpawnFile();
+        spawnFile.set("spawn.world", centeredLocation.getWorld().getName());
+        spawnFile.set("spawn.x", centeredLocation.getX());
+        spawnFile.set("spawn.y", centeredLocation.getY());
+        spawnFile.set("spawn.z", centeredLocation.getZ());
+        spawnFile.set("spawn.yaw", centeredLocation.getYaw());
+        spawnFile.set("spawn.pitch", centeredLocation.getPitch());
+
+        try {
+            SpawnFile.saveSpawnFile();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            plugin.getLogger().warning("Error saving spawn.yml");
+        }
+
 
         plugin.getLogger().info("Spawn location set [X: " + centeredLocation.getX() + " | Y: " + centeredLocation.getY() + " | Z: " + centeredLocation.getZ() + "]");
-        p.sendMessage(ChatColor.GREEN + "Spawn location set at, [X: " + centeredLocation.getX() + " | Y: " + centeredLocation.getY() + " | Z: " + centeredLocation.getZ() + "]");
+        p.sendMessage(ChatColor.GREEN + "Spawn location set at, " + ChatColor.YELLOW +  "[X: " + centeredLocation.getX() + " | Y: " + centeredLocation.getY() + " | Z: " + centeredLocation.getZ() + "]");
     }
 
     @Override
