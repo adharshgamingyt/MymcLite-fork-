@@ -12,12 +12,13 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Build implements CommandExecutor {
 
-    private static ArrayList<Player> buildAllowedPlayers;
+    private static ArrayList<UUID> buildAllowedPlayers = new ArrayList<>();
 
-    public static ArrayList<Player> getBuildAllowedPlayers() {
+    public static ArrayList<UUID> getBuildAllowedPlayers() {
         return buildAllowedPlayers;
     }
 
@@ -49,11 +50,11 @@ public class Build implements CommandExecutor {
 
         if (args.length == 0) {
             Player p = (Player) sender;
-            if (!buildAllowedPlayers.contains(p)) {
-                buildAllowedPlayers.add(p);
+            if (!buildAllowedPlayers.contains(p.getUniqueId())) {
+                buildAllowedPlayers.add(p.getUniqueId());
                 p.sendMessage(ChatColor.GREEN + "Build mode enabled!");
             } else {
-                buildAllowedPlayers.remove(p);
+                buildAllowedPlayers.remove(p.getUniqueId());
                 p.sendMessage(ChatColor.RED + "Build mode disabled!");
             }
         } else {
@@ -63,11 +64,11 @@ public class Build implements CommandExecutor {
             }
 
             Player target = Bukkit.getPlayerExact(targetName);
-            if (!buildAllowedPlayers.contains(target)) {
-                buildAllowedPlayers.add(target);
+            if (!buildAllowedPlayers.contains(target.getUniqueId())) {
+                buildAllowedPlayers.add(target.getUniqueId());
                 target.sendMessage(ChatColor.GREEN + "Build mode enabled by a staff");
             } else {
-                buildAllowedPlayers.remove(target);
+                buildAllowedPlayers.remove(target.getUniqueId());
                 target.sendMessage(ChatColor.RED + "Build mode disabled by a staff");
             }
         }
