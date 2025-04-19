@@ -1,0 +1,17 @@
+me\supposedly_sam\mymcLite\Events\Chat.class
+me\supposedly_sam\mymcLite\Utils\SpawnFile.class
+me\supposedly_sam\mymcLite\Commands\GameSelector.class
+me\supposedly_sam\mymcLite\Events\JoinEvent.class
+me\supposedly_sam\mymcLite\Events\DisabledCommands.class
+me\supposedly_sam\mymcLite\Utils\Inventories.class
+me\supposedly_sam\mymcLite\Commands\Build.class
+me\supposedly_sam\mymcLite\MymcLite.class
+me\supposedly_sam\mymcLite\Utils\Responses.class
+me\supposedly_sam\mymcLite\Models\GameSelectorItemModel.class
+me\supposedly_sam\mymcLite\Commands\Goto.class
+me\supposedly_sam\mymcLite\Utils\PluginMessages.class
+me\supposedly_sam\mymcLite\Utils\HelperFunctions.class
+me\supposedly_sam\mymcLite\Commands\Spawn.class
+me\supposedly_sam\mymcLite\Events\BuildEvents.class
+me\supposedly_sam\mymcLite\Commands\Reload.class
+me\supposedly_sam\mymcLite\Commands\SetSpawn.class
