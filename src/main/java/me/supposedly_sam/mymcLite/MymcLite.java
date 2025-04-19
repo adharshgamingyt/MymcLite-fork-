@@ -38,10 +38,11 @@ public final class MymcLite extends JavaPlugin {
         // Event Registers
         registerListener(new JoinEvent(this));
         registerListener(new LeaveEvent(this));
+        registerListener(new PlayerInteract(this));
+        registerListener(new InventoryClick(this));
         registerListener(new BuildEvents(this));
         registerListener(new Chat(this));
         registerListener(new DisabledCommands(this));
-        registerListener(new InventoryClick(this));
 
         // Command Registers
         registerCommand("mlreload", new Reload(this));

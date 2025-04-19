@@ -70,7 +70,7 @@ public class JoinEvent implements Listener {
         }
 
         // Game selector item
-        if (plugin.getConfig().getBoolean("game-selector.hotbar-item.enabled")) {
+        if (plugin.getConfig().getBoolean("game-selector.enabled") && plugin.getConfig().getBoolean("game-selector.hotbar-item.enabled")) {
             setHotbarItem(player);
         }
     }
@@ -119,6 +119,7 @@ public class JoinEvent implements Listener {
         hotbarMeta.setDisplayName(hotbarItemName);
         hotbarItem.setItemMeta(hotbarMeta);
 
+        player.getInventory().remove(hotbarItem);
         player.getInventory().setItem(slot, hotbarItem);
     }
 }

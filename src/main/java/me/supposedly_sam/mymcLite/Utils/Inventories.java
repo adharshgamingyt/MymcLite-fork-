@@ -124,7 +124,7 @@ public class Inventories {
                 if (lore.isEmpty()) lore.add(" ");
 
                 int invPosition = itemSection.getInt("inventory-position");
-                if (invPosition < 1) invPosition = 1;
+                if (invPosition < 0) invPosition = 0;
 
                 itemModels.add(new GameSelectorItemModel(key, itemMaterial, count, displayName, lore, invPosition, enchanted));
             } catch (IllegalArgumentException ex) {
