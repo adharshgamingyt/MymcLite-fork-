@@ -30,14 +30,20 @@ public class Spawn implements CommandExecutor {
         }
 
         if (sender instanceof Player p) {
+            String spawnServer = plugin.getConfig().getString("spawn.send-to-server");
+            if (spawnServer != null && !spawnServer.isBlank()) {
+                p.performCommand("goto " + spawnServer);
+                return true;
+            }
+
             Location spawnLoc = getSpawnLocation();
             if (spawnLoc == null) {
-                return true;
+                spawnLoc = p.getWorld().getSpawnLocation();
             }
 
             if (args.length == 0) {
                 p.teleport(spawnLoc);
-                p.sendMessage(ChatColor.GREEN + "Teleported to lobby");
+                p.sendMessage(ChatColor.GREEN + "Teleported to spawn");
             } else if (args.length == 1) {
                 if (!p.hasPermission("mymclite.spawn.others")) {
                     Responses.sendNotAuthorized(p);
@@ -62,7 +68,7 @@ public class Spawn implements CommandExecutor {
         FileConfiguration spawnFile = SpawnFile.getSpawnFile();
 
         if (!spawnFile.contains("spawn.world")) {
-            plugin.getLogger().warning("Spawn location not set!");
+            plugin.getLogger().warning("Spawn location not set, using world spawn");
             return null;
         }
 

@@ -1,3 +1,12 @@
+# +----------------------------------------------------------------------------------------------+ #
+# |                                                                                              | #
+# |                                      MYMC LITE                                               | #
+# |                                                                                              | #
+# |                Light-weight plugin for basic server setup (including hubs)                   | #
+# |                                                                                              | #
+# +----------------------------------------------------------------------------------------------+ #
+# Author: supposedly_sam
+
 # Join/Leave messages
 # Supports PlaceholderAPI and minecraft color codes
 # Leave blank to use vanilla join/leave messages
@@ -5,12 +14,16 @@ join-message: "&f[&a+&f] &7%player_name%"
 leave-message: "&f[&c-&f] &7%player_name%"
 
 # Force players to spawn on joining
-# Requires set spawn to work
+# If spawn not set, world spawn is used
 spawn:
   # Force teleport player to spawn on join
+  # If spawn not set, world spawn is used
   force-spawn-on-join: true
   # Enable/Disable '/spawn' command
   command-enabled: true
+  # Send player to another server on execution of '/spawn'
+  # Empty string will send the player to spawn location or world spawn
+  send-to-server: ""
 
 # Enable or disable build/interact in the server
 build:
@@ -46,7 +59,7 @@ disabled-commands:
 # Game Selector Inventory
 # Enable/Disable a game selector menu (Mainly used for hubs)
 game-selector:
-  enabled: true
+  enabled: false
 
   # Hotbar item which will execute the /gsel command
   # Given to players on join
@@ -104,6 +117,19 @@ game-selector:
       # Available click types 'LEFT', 'RIGHT', 'SHIFT_LEFT', 'SHIFT_RIGHT', 'DROP' (Q)
       # Format: CLICK_TYPE: "command"
       # Click types must be uppercase, commands do not need '/'
+      click-commands:
+        LEFT: "list"
+        RIGHT: "pl"
+
+    item2:
+      material: "CHEST"
+      count: 1
+      enchanted: true
+      display-name: "Sample"
+      lore:
+        - "&aLine 1"
+        - "Line 2"
+      inventory-position: 1
       click-commands:
         LEFT: "list"
         RIGHT: "pl"
