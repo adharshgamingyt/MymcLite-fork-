@@ -28,6 +28,10 @@ public class InventoryClick implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
+        if (!plugin.getConfig().getBoolean("game-selector.enabled")){
+            return;
+        }
+
         String invTitle = ChatColor.stripColor(e.getView().getTitle());
         String gameSelectorTitle = plugin.getConfig().getString("game-selector.title");
 

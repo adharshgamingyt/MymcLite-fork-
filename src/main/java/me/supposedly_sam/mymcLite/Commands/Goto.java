@@ -36,6 +36,16 @@ public class Goto implements CommandExecutor, TabCompleter {
 
         if (sender instanceof Player p) {
             if (args.length == 1) {
+                if (serverList == null || serverList.isEmpty()) {
+                    JoinEvent.sendGetServers(p);
+                    serverList = JoinEvent.getServers();
+
+                    if (serverList == null) {
+                        plugin.getLogger().warning("Server list is null");
+                        return true;
+                    }
+                }
+
                 String server = args[0];
                 if (!serverList.contains(server)) {
                     p.sendMessage(ChatColor.RED + "Server (" + server +  ") does not exist");

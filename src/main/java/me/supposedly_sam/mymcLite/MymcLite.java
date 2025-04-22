@@ -40,7 +40,7 @@ public final class MymcLite extends JavaPlugin {
         registerListener(new LeaveEvent(this));
         registerListener(new PlayerInteract(this));
         registerListener(new InventoryClick(this));
-        registerListener(new BuildEvents(this));
+//        registerListener(new BuildEvents(this));
         registerListener(new Chat(this));
         registerListener(new DisabledCommands(this));
 
@@ -48,7 +48,7 @@ public final class MymcLite extends JavaPlugin {
         registerCommand("mlreload", new Reload(this));
         registerCommand("setspawn", new SetSpawn(this));
         registerCommand("spawn", new Spawn(this));
-        registerCommand("build", new Build());
+//        registerCommand("build", new Build());
         registerCommand("goto", new Goto(this));
         registerCommand("gameselector", new GameSelector(this));
 

@@ -14,6 +14,7 @@
     <properties>
         <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <minecraft.version>1.21.4-R0.1-SNAPSHOT</minecraft.version>
     </properties>
 
     <build>
@@ -50,6 +51,29 @@
         </resources>
     </build>
 
+    <profiles>
+        <profile>
+            <id>mc-1.20.2</id>
+            <properties>
+                <minecraft.version>1.20.2-R0.1-SNAPSHOT</minecraft.version>
+                <api.version>1.20</api.version>
+            </properties>
+            <build>
+                <finalName>MymcLite-1.20.2</finalName>
+            </build>
+        </profile>
+        <profile>
+            <id>mc-1.21.4</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <minecraft.version>1.21.4-R0.1-SNAPSHOT</minecraft.version>
+                <api.version>1.21</api.version>
+            </properties>
+        </profile>
+    </profiles>
+
     <repositories>
         <repository>
             <id>spigotmc-repo</id>
@@ -69,7 +93,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.21.4-R0.1-SNAPSHOT</version>
+            <version>${minecraft.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

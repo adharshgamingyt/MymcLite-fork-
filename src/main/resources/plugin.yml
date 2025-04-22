@@ -1,7 +1,7 @@
 name: MymcLite
 version: '1.0-SNAPSHOT'
 main: me.supposedly_sam.mymcLite.MymcLite
-api-version: '1.21'
+api-version: '${api.version}'
 commands:
   mlreload:
     description: Reloads the config.yml

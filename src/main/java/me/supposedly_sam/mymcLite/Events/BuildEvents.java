@@ -23,46 +23,46 @@ public class BuildEvents implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
-    public void onBlockPlace(BlockPlaceEvent e) {
-        Player p = e.getPlayer();
-        if (!isAllowedToBuild(p)) e.setCancelled(true);
-    }
-
-    @EventHandler
-    public void onBlockBreak(BlockBreakEvent e) {
-        Player p = e.getPlayer();
-        if (!isAllowedToBuild(p)) e.setCancelled(true);
-    }
-
-    @EventHandler
-    public void onPlayerInteract(PlayerInteractEvent e) {
-        Player p = e.getPlayer();
-        if (!isAllowedToBuild(p)) e.setCancelled(true);
-    }
-
-    @EventHandler
-    public void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
-        Player p = e.getPlayer();
-        if (!isAllowedToBuild(p)) e.setCancelled(true);
-    }
-
-    @EventHandler
-    public void onPlayerInteractAtEntityEvent(PlayerInteractAtEntityEvent e){
-        Player p = e.getPlayer();
-        if (!isAllowedToBuild(p)) e.setCancelled(true);
-    }
-
-
-    private boolean isAllowedToBuild(Player p) {
-        if (plugin.getConfig().getBoolean("build.enabled")){
-            return true;
-        }
-        ArrayList<UUID> buildAllowedPlayers = Build.getBuildAllowedPlayers();
-        if (!buildAllowedPlayers.contains(p.getUniqueId())) {
-            p.sendMessage(ChatColor.RED + "You are not allowed to do that.");
-            return false;
-        }
-        return true;
-    }
+//    @EventHandler
+//    public void onBlockPlace(BlockPlaceEvent e) {
+//        Player p = e.getPlayer();
+//        if (!isAllowedToBuild(p)) e.setCancelled(true);
+//    }
+//
+//    @EventHandler
+//    public void onBlockBreak(BlockBreakEvent e) {
+//        Player p = e.getPlayer();
+//        if (!isAllowedToBuild(p)) e.setCancelled(true);
+//    }
+//
+//    @EventHandler
+//    public void onPlayerInteract(PlayerInteractEvent e) {
+//        Player p = e.getPlayer();
+//        if (!isAllowedToBuild(p)) e.setCancelled(true);
+//    }
+//
+//    @EventHandler
+//    public void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
+//        Player p = e.getPlayer();
+//        if (!isAllowedToBuild(p)) e.setCancelled(true);
+//    }
+//
+//    @EventHandler
+//    public void onPlayerInteractAtEntityEvent(PlayerInteractAtEntityEvent e){
+//        Player p = e.getPlayer();
+//        if (!isAllowedToBuild(p)) e.setCancelled(true);
+//    }
+//
+//
+//    private boolean isAllowedToBuild(Player p) {
+//        if (plugin.getConfig().getBoolean("build.enabled")){
+//            return true;
+//        }
+//        ArrayList<UUID> buildAllowedPlayers = Build.getBuildAllowedPlayers();
+//        if (!buildAllowedPlayers.contains(p.getUniqueId())) {
+//            p.sendMessage(ChatColor.RED + "You are not allowed to do that.");
+//            return false;
+//        }
+//        return true;
+//    }
 }

@@ -85,7 +85,7 @@ public class Inventories {
             itemMeta.setLore(loreFormatted);
 
             if (itemModel.isEnchanted()) {
-                itemMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
+                itemMeta.addEnchant(Enchantment.CHANNELING, 1, true);
                 itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             }
 

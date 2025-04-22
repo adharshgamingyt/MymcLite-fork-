@@ -24,12 +24,12 @@ import java.util.ArrayList;
 
 public class JoinEvent implements Listener {
 
-    private final Plugin plugin;
+    private static Plugin plugin;
     private static ArrayList<String> servers;
     private static boolean requestedServerList = false;
 
     public JoinEvent(Plugin plugin) {
-        this.plugin = plugin;
+        JoinEvent.plugin = plugin;
     }
 
     public static ArrayList<String> getServers() {
@@ -75,7 +75,7 @@ public class JoinEvent implements Listener {
         }
     }
 
-    private void sendGetServers(Player player) {
+    public static void sendGetServers(Player player) {
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         DataOutputStream out = new DataOutputStream(b);
         try {
