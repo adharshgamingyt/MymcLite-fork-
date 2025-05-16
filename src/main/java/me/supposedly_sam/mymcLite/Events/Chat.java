@@ -45,12 +45,14 @@ public class Chat implements Listener {
             return;
         }
 
+        chatFormat = ChatColor.translateAlternateColorCodes('&', chatFormat);
+
         chatFormat = PlaceholderAPI.setPlaceholders(p, chatFormat)
                 .replace("%author%", p.getName())
                 .replace("%message%", message);
 
         try {
-            e.setFormat(ChatColor.translateAlternateColorCodes('&', chatFormat));
+            e.setFormat(chatFormat);
         } catch (IllegalFormatException | NullPointerException ex) {
             plugin.getLogger().warning("Chat format error, reverting to default format. " + e.getMessage());
             e.setFormat(p.getName() + ": " + message);

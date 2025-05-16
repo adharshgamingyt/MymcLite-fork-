@@ -31,6 +31,53 @@ commands:
       - gsel
       - menu
       - game
+  creative:
+    description: Change gamemode to creative
+    usage: /<command> [player]
+    aliases:
+      - gmc
+  survival:
+    description: Change gamemode to survival
+    usage: /<command> [player]
+    aliases:
+      - gms
+  adventure:
+    description: Change gamemode to adventure
+    usage: /<command> [player]
+    aliases:
+      - gma
+  spectator:
+    description: Change gamemode to spectator
+    usage: /<command> [player]
+    aliases:
+      - gmsp
+  ban:
+    description: Ban players from the server
+    usage: /<command> <player> [duration] [reason]
+    aliases:
+      - tempban
+  ban-ip:
+    description: IP ban other players
+    usage: /<command> <player> [duration] [reason]
+    aliases:
+      - banip
+      - tempban-ip
+      - tempbanip
+  unban:
+    description: Unban players
+    usage: /<command> <player>
+    aliases:
+      - pardon
+  unban-ip:
+    description: Unban ip of banned players
+    usage: /<command> <ip>
+    aliases:
+      - pardon-ip
+      - unbanip
+  kick:
+    description: Kick a player or all from server
+    usage: /<command> <player/all>
+
 
 permissions:
   mycmlite.reload:
@@ -42,6 +89,9 @@ permissions:
   mymclite.spawn.others:
     default: op
     description: Permission to teleport other players to spawn
+  mymclite.spawn.bypass-disabled:
+    default: op
+    description: Permission to bypass disabled spawn command
   mymclite.build:
     default: op
     description: Permission to toggle build mode
@@ -57,3 +107,45 @@ permissions:
   mymclite.gselector.others:
     default: op
     description: Permission to show game selector to other players
+  mymclite.creative:
+    default: op
+    description: Permission to change gamemode to creative
+  mymclite.creative.others:
+    default: op
+    description: Permission to change other players gamemode to creative
+  mymclite.survival:
+    default: op
+    description: Permission to change gamemode to survival
+  mymclite.survival.others:
+    default: op
+    description: Permission to change other players gamemode to survival
+  mymclite.adventure:
+    default: op
+    description: Permission to change gamemode to adventure
+  mymclite.adventure.others:
+    default: op
+    description: Permission to change other players gamemode to adventure
+  mymclite.spectator:
+    default: op
+    description: Permission to change gamemode to spectator
+  mymclite.spectator.others:
+    default: op
+    description: Permission to change other players gamemode to spectator
+  mymclite.ban:
+    default: op
+    description: Permission to ban other players
+  mymclite.ban-ip:
+    default: op
+    description: Permission to ip ban other players
+  mymclite.unban:
+    default: op
+    description: Permission to unban banned players
+  mymclite.unban-ip:
+    default: op
+    description: Permission to unban ip of banned players
+  mymclite.kick:
+    default: op
+    description: Permission to kick players
+  mymclite.kick.bypass-kickall:
+    default: op
+    description: Permission to bypass kick all command

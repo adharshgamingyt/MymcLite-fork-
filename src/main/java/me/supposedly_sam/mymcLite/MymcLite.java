@@ -2,6 +2,11 @@ package me.supposedly_sam.mymcLite;
 
 import com.google.common.collect.Iterables;
 import me.supposedly_sam.mymcLite.Commands.*;
+import me.supposedly_sam.mymcLite.Commands.Admin.*;
+import me.supposedly_sam.mymcLite.Commands.Gamemode.Adventure;
+import me.supposedly_sam.mymcLite.Commands.Gamemode.Creative;
+import me.supposedly_sam.mymcLite.Commands.Gamemode.Spectator;
+import me.supposedly_sam.mymcLite.Commands.Gamemode.Survival;
 import me.supposedly_sam.mymcLite.Events.*;
 import me.supposedly_sam.mymcLite.Utils.PluginMessages;
 import me.supposedly_sam.mymcLite.Utils.SpawnFile;
@@ -52,6 +57,16 @@ public final class MymcLite extends JavaPlugin {
         registerCommand("goto", new Goto(this));
         registerCommand("gameselector", new GameSelector(this));
 
+        registerCommand("creative", new Creative());
+        registerCommand("survival", new Survival());
+        registerCommand("adventure", new Adventure());
+        registerCommand("spectator", new Spectator());
+
+        registerCommand("ban", new Ban());
+        registerCommand("ban-ip", new BanIP());
+        registerCommand("unban", new Unban());
+        registerCommand("unban-ip", new UnbanIP());
+        registerCommand("kick", new Kick());
     }
 
     @Override

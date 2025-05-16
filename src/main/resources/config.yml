@@ -13,6 +13,20 @@
 join-message: "&f[&a+&f] &7%player_name%"
 leave-message: "&f[&c-&f] &7%player_name%"
 
+# Join title
+# Display a title on player join
+# Supports PlaceholderAPI and minecraft color codes
+join-title:
+  # Enable/Disable the first join title
+  enabled: true
+  # This will display the title only the first time a player joins
+  # Setting this to false, will display the title everytime the player joins
+  first-join: true
+  title: "&aWelcome"
+  subtitle: "&7Hey! &n%player_name%&r&7. Welcome to the server"
+  # The title stay on-screen time (in seconds)
+  title-stay: 10
+
 # Force players to spawn on joining
 # If spawn not set, world spawn is used
 spawn:
@@ -20,7 +34,12 @@ spawn:
   # If spawn not set, world spawn is used
   force-spawn-on-join: true
   # Enable/Disable '/spawn' command
+  # Players with 'mymclite.spawn.bypass-disabled' will be able to bypass this
   command-enabled: true
+  # Time in seconds to delay the execution of spawn command
+  # Players with 'mymclite.spawn.bypass-delay' will be able to bypass this
+  # 0 to disable delay
+  command-delay: 5
   # Send player to another server on execution of '/spawn'
   # Empty string will send the player to spawn location or world spawn
   send-to-server: ""
@@ -49,15 +68,25 @@ chat:
 disabled-commands:
   commands:
     - "pl"
+    - "bukkit:pl"
     - "plugins"
+    - "bukkit:plugins"
     - "ver"
+    - "bukkit:ver"
     - "version"
+    - "bukkit:version"
     - "?"
+    - "bukkit:?"
+    - "bukkit:about"
     - "help"
+    - "bukkit:help"
+    - "minecraft:help"
+    - "me"
+    - "minecraft:me"
   disable-message: "&cThis command has been disabled."
 
 # Game Selector Inventory
-# Enable/Disable a game selector menu (Mainly used for hubs)
+# Enables/Disables a game selector menu (Mainly used for hubs)
 game-selector:
   enabled: false
 

@@ -13,6 +13,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 
 public class Spawn implements CommandExecutor {
@@ -24,14 +26,27 @@ public class Spawn implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
-        if (!plugin.getConfig().getBoolean("spawn.command-enabled")) {
-            Responses.sendDisabledCommand(sender);
-            return true;
-        }
-
         if (sender instanceof Player p) {
+            if (!plugin.getConfig().getBoolean("spawn.command-enabled") && !p.hasPermission("mymclite.spawn.bypass-disabled")) {
+                Responses.sendDisabledCommand(sender);
+                return true;
+            }
+
             String spawnServer = plugin.getConfig().getString("spawn.send-to-server");
             if (spawnServer != null && !spawnServer.isBlank()) {
+                int commandDelay = plugin.getConfig().getInt("spawn.command-delay");
+                if (commandDelay > 0 && !p.hasPermission("mymclite.spawn.bypass-delay")) {
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aTeleporting to spawn in &l" + commandDelay + "&r &aseconds"));
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            p.performCommand("goto " + spawnServer);
+                            this.cancel();
+                        }
+                    }.runTaskLater(plugin, commandDelay * 20L);
+                    return true;
+                }
+
                 p.performCommand("goto " + spawnServer);
                 return true;
             }
@@ -42,6 +57,21 @@ public class Spawn implements CommandExecutor {
             }
 
             if (args.length == 0) {
+                int commandDelay = plugin.getConfig().getInt("spawn.command-delay");
+                if (commandDelay > 0 && !p.hasPermission("mymclite.spawn.bypass-delay")) {
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aTeleporting to spawn in &l" + commandDelay + "&r &aseconds"));
+                    Location finalSpawnLoc = spawnLoc;
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            p.teleport(finalSpawnLoc);
+                            p.sendMessage(ChatColor.GREEN + "Teleported to spawn");
+                            this.cancel();
+                        }
+                    }.runTaskLater(plugin, commandDelay * 20L);
+                    return true;
+                }
+
                 p.teleport(spawnLoc);
                 p.sendMessage(ChatColor.GREEN + "Teleported to spawn");
             } else if (args.length == 1) {

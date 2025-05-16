@@ -26,4 +26,9 @@ public class Responses {
         String disabledCommandMessage = ChatColor.translateAlternateColorCodes('&', "&c[✘] This command has been disabled.");
         target.sendMessage(disabledCommandMessage);
     }
+
+    public static void sendPlayerNotExists(CommandSender target) {
+        String playerNotExistsMessage = ChatColor.translateAlternateColorCodes('&', "&c[✘] Player does not exist.");
+        target.sendMessage(playerNotExistsMessage);
+    }
 }

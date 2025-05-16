@@ -51,6 +51,18 @@ public class JoinEvent implements Listener {
 
         Player player = e.getPlayer();
 
+        // First Join Title
+        if (plugin.getConfig().getBoolean("join-title.enabled")){
+            if (plugin.getConfig().getBoolean("join-title.first-join")) {
+                if (!player.hasPlayedBefore()) {
+                    displayTitle(player);
+                }
+            } else {
+                displayTitle(player);
+            }
+
+        }
+
         // Join Message
         String joinMessage = plugin.getConfig().getString("join-message");
         if (joinMessage != null && !joinMessage.isBlank()) {
@@ -73,6 +85,28 @@ public class JoinEvent implements Listener {
         if (plugin.getConfig().getBoolean("game-selector.enabled") && plugin.getConfig().getBoolean("game-selector.hotbar-item.enabled")) {
             setHotbarItem(player);
         }
+    }
+
+    private void displayTitle(Player player) {
+        String title = plugin.getConfig().getString("join-title.title");
+        String subtitle = plugin.getConfig().getString("join-title.subtitle");
+        int stay = plugin.getConfig().getInt("join-title.title-stay");
+
+        if (title != null) {
+            title = PlaceholderAPI.setPlaceholders(player, title);
+            title = ChatColor.translateAlternateColorCodes('&', title);
+        }
+
+        if (subtitle != null) {
+            subtitle = PlaceholderAPI.setPlaceholders(player, subtitle);
+            subtitle = ChatColor.translateAlternateColorCodes('&', subtitle);
+        }
+
+        if (stay < 1) {
+            stay = 5;
+        }
+
+        player.sendTitle(title, subtitle, 20, stay * 20, 20);
     }
 
     public static void sendGetServers(Player player) {

@@ -32,25 +32,25 @@ public class Goto implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
-        ArrayList<String> serverList = JoinEvent.getServers();
-
+//        ArrayList<String> serverList = JoinEvent.getServers();
+// TODO: Rectify the getServers race condition issue
         if (sender instanceof Player p) {
             if (args.length == 1) {
-                if (serverList == null || serverList.isEmpty()) {
-                    JoinEvent.sendGetServers(p);
-                    serverList = JoinEvent.getServers();
-
-                    if (serverList == null) {
-                        plugin.getLogger().warning("Server list is null");
-                        return true;
-                    }
-                }
-
+//                if (serverList == null || serverList.isEmpty()) {
+//                    JoinEvent.sendGetServers(p);
+//                    serverList = JoinEvent.getServers();
+//
+//                    if (serverList == null) {
+//                        plugin.getLogger().warning("Server list is null");
+//                        return true;
+//                    }
+//                }
+//
                 String server = args[0];
-                if (!serverList.contains(server)) {
-                    p.sendMessage(ChatColor.RED + "Server (" + server +  ") does not exist");
-                    return true;
-                }
+//                if (!serverList.contains(server)) {
+//                    p.sendMessage(ChatColor.RED + "Server (" + server +  ") does not exist");
+//                    return true;
+//                }
                 connectToServer(p, server);
             } else if (args.length == 2) {
                 if (!p.hasPermission("mymclite.goto.others")) {
@@ -61,10 +61,10 @@ public class Goto implements CommandExecutor, TabCompleter {
                 String server = args[0];
                 String targetName = args[1];
 
-                if (!serverList.contains(server)) {
-                    p.sendMessage(ChatColor.RED + "Server (" + server +  ") does not exist");
-                    return true;
-                }
+//                if (!serverList.contains(server)) {
+//                    p.sendMessage(ChatColor.RED + "Server (" + server +  ") does not exist");
+//                    return true;
+//                }
 
                 if (!HelperFunctions.isPlayerOnline(p, targetName)) {
                     return true;
@@ -97,19 +97,19 @@ public class Goto implements CommandExecutor, TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
-        if (args.length == 1) {
-            ArrayList<String> servers = JoinEvent.getServers();
-            if (servers != null) {
-                return servers.stream()
-                        .filter(s -> s.toLowerCase().startsWith(args[0].toLowerCase()))
-                        .collect(Collectors.toList());
-            }
-        } else if (args.length == 2) {
-            return Bukkit.getOnlinePlayers().stream()
-                    .map(Player::getName)
-                    .filter(name -> name.toLowerCase().startsWith(args[1].toLowerCase()))
-                    .collect(Collectors.toList());
-        }
+//        if (args.length == 1) {
+//            ArrayList<String> servers = JoinEvent.getServers();
+//            if (servers != null) {
+//                return servers.stream()
+//                        .filter(s -> s.toLowerCase().startsWith(args[0].toLowerCase()))
+//                        .collect(Collectors.toList());
+//            }
+//        } else if (args.length == 2) {
+//            return Bukkit.getOnlinePlayers().stream()
+//                    .map(Player::getName)
+//                    .filter(name -> name.toLowerCase().startsWith(args[1].toLowerCase()))
+//                    .collect(Collectors.toList());
+//        }
 
         return Collections.emptyList();
     }
