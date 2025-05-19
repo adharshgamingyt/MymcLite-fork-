@@ -33,6 +33,10 @@ public class AutoAnnouncer {
         announcerTask = new BukkitRunnable() {
             @Override
             public void run() {
+                if (!plugin.getConfig().getBoolean("auto-announcer.enabled")) {
+                    this.cancel();
+                }
+
                 String rawHeader = plugin.getConfig().getString("auto-announcer.message-header");
                 String header = rawHeader == null ? "&7-------------" : rawHeader;
 
