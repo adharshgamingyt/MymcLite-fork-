@@ -61,6 +61,29 @@ chat:
   # - %message%: Message content
   chat-format: "&8&l[&r&f%author%&8&l]&r &7%message%"
 
+# Auto Announcer
+# Send periodic announcements
+auto-announcer:
+  # Enable/Disable auto announcer in the server
+  enabled: true
+  # Adjust the frequency of the announcement (in seconds)
+  frequency: 10
+  # Message header will be the first line in the announcement
+  # Empty string will disable header
+  # Supports minecraft color codes
+  message-header: "&7-----------------"
+  # Message footer will be the last line in the announcement
+  # Empty string will disable footer
+  # Supports minecraft color codes
+  message-footer: "&7-----------------"
+  # The actual message to be displayed
+  # Different announcements can be displayed, seperated by '\n'
+  # Supports PlaceholderAPI (user-specific) and minecraft color codes
+  # Example: - "&aThis is line 1\n &bThis is line 2
+  messages:
+    - "&aThis is line 1 \n&bThis is line 2"
+    - "&cThis is announcement 2"
+
 # Disabled commands
 # List commands to restrict players from accessing them
 # Players with 'mymclite.disabled-commands.bypass' permission

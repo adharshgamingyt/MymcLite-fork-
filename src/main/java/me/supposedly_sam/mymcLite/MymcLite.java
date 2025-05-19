@@ -8,6 +8,7 @@ import me.supposedly_sam.mymcLite.Commands.Gamemode.Creative;
 import me.supposedly_sam.mymcLite.Commands.Gamemode.Spectator;
 import me.supposedly_sam.mymcLite.Commands.Gamemode.Survival;
 import me.supposedly_sam.mymcLite.Events.*;
+import me.supposedly_sam.mymcLite.Tasks.AutoAnnouncer;
 import me.supposedly_sam.mymcLite.Utils.PluginMessages;
 import me.supposedly_sam.mymcLite.Utils.SpawnFile;
 import org.bukkit.Bukkit;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 public final class MymcLite extends JavaPlugin {
 
     private final PluginMessages pluginMessages = new PluginMessages();
+    private AutoAnnouncer announcer;
 
     @Override
     public void onEnable() {
@@ -67,6 +69,10 @@ public final class MymcLite extends JavaPlugin {
         registerCommand("unban", new Unban());
         registerCommand("unban-ip", new UnbanIP());
         registerCommand("kick", new Kick());
+
+        // Tasks
+        announcer = new AutoAnnouncer(this);
+        announcer.start();
     }
 
     @Override
@@ -74,6 +80,9 @@ public final class MymcLite extends JavaPlugin {
         // Unregistering Plugin Channels
         Bukkit.getServer().getMessenger().unregisterOutgoingPluginChannel(this, "BungeeCord");
         Bukkit.getServer().getMessenger().unregisterIncomingPluginChannel(this, "BungeeCord", pluginMessages);
+
+        // Disable Tasks
+        announcer.stop();
     }
 
     // Command/Tab completer register
