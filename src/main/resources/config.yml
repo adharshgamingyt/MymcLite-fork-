@@ -60,6 +60,37 @@ chat:
   # - %author%: Message author
   # - %message%: Message content
   chat-format: "&8&l[&r&f%author%&8&l]&r &7%message%"
+  # Chat cooldown (in seconds)
+  # Setting this value to 0 will disable cooldown
+  # Players with 'mymclite.chat.bypass-cooldown' will be able to bypass this
+  chat-cooldown: 3
+
+# Message command format
+# Supports minecraft color codes and some placeholders
+# Available Placeholders:
+# - %sender%: Message sender
+# - %receiver%: Message receiver
+# - %message%: Message content
+msg:
+  sender-format: "&b[You] &f-> &b%receiver%: &7%message%"
+  receiver-format: "&b%sender% &f-> &b[You]: &7%message%"
+
+# Announce command
+# Broadcast an announcement to all online players
+announce:
+  # The header displayed in chat before the actual announcement
+  # Supports minecraft color codes
+  header: "&4⌈ &cAnnouncement &4⌋&r"
+  # Announcement title, displayed on each player's screen
+  # Supports minecraft color codes
+  title: "&4[&cANNOUNCEMENT&4]"
+  # Announcement subtitle
+  # Empty string will disable this
+  # Supports minecraft color codes
+  subtitle: ""
+  # Announcement title stay on-screen time (in seconds)
+  # Non 0 value required
+  stay: 5
 
 # Auto Announcer
 # Send periodic announcements

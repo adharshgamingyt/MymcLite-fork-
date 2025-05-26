@@ -77,7 +77,27 @@ commands:
   kick:
     description: Kick a player or all from server
     usage: /<command> <player/all>
-
+  announce:
+    description: Broadcast announcements to the server
+    usage: /<command> <message>
+  msg:
+    description: Send private messages to a player
+    usage: /<command> <player> <message>
+    aliases:
+      - message
+      - whisper
+      - w
+      - tell
+  reply:
+    description: Reply to private messages
+    usage: /<command> <message>
+    aliases:
+      - r
+  msgtoggle:
+    description: Toggle private messages
+    usage: /<command>
+    aliases:
+      - msgt
 
 permissions:
   mycmlite.reload:
@@ -101,6 +121,12 @@ permissions:
   mymclite.chat.colours:
     default: op
     description: Permission to use chat colours
+  mymclite.chat.links:
+    default: op
+    description: Permission to send links in chat
+  mymclite.chat.bypass-cooldown:
+    default: op
+    description: Permission to bypass chat cooldowns
   mymclite.disabled-commands.bypass:
     default: op
     description: Permission to bypass disabled commands
@@ -149,3 +175,6 @@ permissions:
   mymclite.kick.bypass-kickall:
     default: op
     description: Permission to bypass kick all command
+  mymclite.announce:
+    default: op
+    description: Permission to broadcast announcements

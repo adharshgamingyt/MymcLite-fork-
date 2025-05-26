@@ -58,6 +58,10 @@ public final class MymcLite extends JavaPlugin {
 //        registerCommand("build", new Build());
         registerCommand("goto", new Goto(this));
         registerCommand("gameselector", new GameSelector(this));
+        registerCommand("announce", new Announce(this));
+        registerCommand("msg", new Msg(this));
+        registerCommand("reply", new Reply());
+        registerCommand("msgtoggle", new MsgToggle());
 
         registerCommand("creative", new Creative());
         registerCommand("survival", new Survival());

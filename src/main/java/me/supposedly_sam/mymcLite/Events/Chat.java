@@ -9,7 +9,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.Plugin;
 
+import java.util.HashMap;
 import java.util.IllegalFormatException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Chat implements Listener {
 
@@ -17,6 +20,8 @@ public class Chat implements Listener {
     public Chat(Plugin plugin) {
         this.plugin = plugin;
     }
+
+    private HashMap<Player, Long> chatCooldown = new HashMap<>();
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerChat(AsyncPlayerChatEvent e) {
@@ -26,6 +31,32 @@ public class Chat implements Listener {
 
         Player p = e.getPlayer();
         String message = e.getMessage();
+
+        int cooldown = plugin.getConfig().getInt("chat.chat-cooldown");
+        if (cooldown > 1) {
+            if (chatCooldown.containsKey(p) && !p.hasPermission("mymclite.chat.bypass-cooldown")) {
+                long secondsLeft = (((chatCooldown.get(p)) / 1000) + cooldown) - (System.currentTimeMillis() / 1000);
+                if(secondsLeft > 0){
+
+                    e.setCancelled(true);
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7You must wait &c" + secondsLeft + " second(s) &7before sending another message"));
+                    return;
+
+                }
+            }
+        }
+
+        chatCooldown.put(p, System.currentTimeMillis());
+
+        // URL checker
+        Pattern urlPattern = Pattern.compile("((http|https)://\\S+)");
+        Matcher urlMatcher = urlPattern.matcher(message);
+
+        if(urlMatcher.find() && !p.hasPermission("mymclite.chat.links")){
+            e.setCancelled(true);
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7You &ccannot &7send links in global chat."));
+            return;
+        }
 
         // Replacing '%' with '/'
         if (message.contains("%")) {

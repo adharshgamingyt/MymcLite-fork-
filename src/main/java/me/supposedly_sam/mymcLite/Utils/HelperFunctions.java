@@ -5,10 +5,12 @@ import me.supposedly_sam.mymcLite.Models.BanMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -102,17 +104,21 @@ public class HelperFunctions {
         return sb.toString();
     }
 
+    public static String buildString(String[] args) {
+        StringBuilder builder = new StringBuilder();
+        for (String arg : args) {
+            builder.append(arg);
+            builder.append(" ");
+        }
+
+        String string = builder.toString();
+        return string.stripTrailing();
+    }
+
     public static BanMessage getBanReasonFormatted(String[] args, String durationAlias) {
         String reason = "&fBanned by staff";
         if (args.length > 2) {
-            StringBuilder builder = new StringBuilder();
-            for (int i = 2; i < args.length; i++) {
-                builder.append(args[i]);
-                builder.append(" ");
-            }
-
-            reason = builder.toString();
-            reason = reason.stripTrailing();
+            reason = buildString(Arrays.copyOfRange(args, 2, args.length));
         }
 
         String durationText = "\n&cDuration: &f" + durationAlias;
@@ -126,16 +132,17 @@ public class HelperFunctions {
     public static String getKickReasonFormatted(String[] args) {
         String reason = "&fKicked by staff";
         if (args.length > 1) {
-            StringBuilder builder = new StringBuilder();
-            for (int i = 1; i < args.length; i++) {
-                builder.append(args[i]);
-                builder.append(" ");
-            }
-
-            reason = builder.toString();
-            reason = reason.stripTrailing();
+            reason = buildString(Arrays.copyOfRange(args, 1, args.length));
         }
 
         return ChatColor.translateAlternateColorCodes('&', reason);
+    }
+
+    public static String parseMsgPlaceholders(String format, CommandSender sender, CommandSender receiver, String message) {
+        format = format.replace("%sender%", sender.getName());
+        format = format.replace("%receiver%", receiver.getName());
+        format = format.replace("%message%", message);
+
+        return format;
     }
 }
