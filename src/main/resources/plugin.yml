@@ -1,6 +1,6 @@
 name: MymcLite
 version: '1.0-SNAPSHOT'
-main: me.supposedly_sam.mymcLite.MymcLite
+main: com.adharsh.mymcLite.MymcLite
 api-version: '${api.version}'
 commands:
   mlreload:
